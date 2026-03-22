@@ -16,13 +16,6 @@
       "fetch": ["https://hubspot-gong-app-production.up.railway.app"],
       "iframe": [],
       "img": []
-    },
-    "webhooks": [
-      {
-        "eventType": "deal.propertyChange",
-        "propertyName": "dealstage",
-        "targetUrl": "https://hubspot-gong-app-production.up.railway.app/webhook"
-      }
-    ]
+    }
   }
 }
