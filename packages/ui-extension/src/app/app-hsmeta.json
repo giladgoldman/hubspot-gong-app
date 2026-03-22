@@ -1,3 +1,17 @@
 {
-  "uid": "gong_for_hubspot"
+  "uid": "gong_for_hubspot",
+  "type": "private-app",
+  "config": {
+    "scopes": ["crm.objects.deals.read"],
+    "extensions": {
+      "crm": {
+        "cards": [
+          {
+            "file": "extensions/gong-card/gong-card.json",
+            "type": "crm-card"
+          }
+        ]
+      }
+    }
+  }
 }
