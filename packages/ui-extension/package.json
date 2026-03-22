@@ -7,6 +7,6 @@
     "deploy": "hs project deploy"
   },
   "dependencies": {
-    "@hubspot/ui-extensions": "^0.14.0"
+    "@hubspot/ui-extensions": "^0.12.3"
   }
 }

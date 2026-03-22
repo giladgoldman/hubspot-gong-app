@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@hubspot/ui-extensions": "^0.14.0",
+    "@hubspot/ui-extensions": "^0.12.3",
     "react": "^18.0.0"
   }
 }
