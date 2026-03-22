@@ -8,7 +8,7 @@
     "auth": {
       "type": "oauth",
       "redirectUrls": ["https://hubspot-gong-app-production.up.railway.app/oauth-callback"],
-      "requiredScopes": ["crm.objects.deals.read"],
+      "requiredScopes": ["crm.objects.deals.read", "oauth"],
       "optionalScopes": [],
       "conditionallyRequiredScopes": []
     },
