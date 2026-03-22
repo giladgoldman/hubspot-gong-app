@@ -6,8 +6,7 @@
     "description": "Plays a synthesized gong sound when a deal reaches Closed Won",
     "distribution": "private",
     "auth": {
-      "type": "static",
-      "redirectUrls": [],
+      "type": "no_api_access",
       "requiredScopes": ["crm.objects.deals.read"],
       "optionalScopes": [],
       "conditionallyRequiredScopes": []
