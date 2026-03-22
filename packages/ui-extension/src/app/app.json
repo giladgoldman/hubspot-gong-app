@@ -1,0 +1,17 @@
+{
+  "name": "Gong for HubSpot",
+  "uid": "gong_for_hubspot",
+  "scopes": [
+    "crm.objects.deals.read"
+  ],
+  "extensions": {
+    "crm": {
+      "cards": [
+        {
+          "file": "extensions/gong-card/gong-card.json",
+          "type": "crm-card"
+        }
+      ]
+    }
+  }
+}

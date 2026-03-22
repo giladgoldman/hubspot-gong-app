@@ -1,0 +1,13 @@
+{
+  "name": "hubspot-gong-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=packages/backend",
+    "start:backend": "npm run start --workspace=packages/backend",
+    "deploy:ui": "npm run deploy --workspace=packages/ui-extension"
+  }
+}

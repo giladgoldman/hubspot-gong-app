@@ -1,0 +1,13 @@
+{
+  "type": "crm-card",
+  "data": {
+    "title": "Gong!",
+    "location": "crm.record.sidebar",
+    "module": {
+      "file": "GongCard.jsx"
+    },
+    "objectTypes": [
+      { "name": "deals" }
+    ]
+  }
+}

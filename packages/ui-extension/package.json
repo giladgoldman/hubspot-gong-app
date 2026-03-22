@@ -1,0 +1,12 @@
+{
+  "name": "@gong-for-hubspot/ui-extension",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "hs project dev",
+    "deploy": "hs project deploy"
+  },
+  "dependencies": {
+    "@hubspot/ui-extensions": "^0.14.0"
+  }
+}
