@@ -1,0 +1,7 @@
+{
+  "label": "Gong for HubSpot",
+  "description": "Plays a synthesized gong sound when a deal reaches Closed Won",
+  "uid": "gong_for_hubspot",
+  "scopes": ["crm.objects.deals.read"],
+  "public": false
+}
