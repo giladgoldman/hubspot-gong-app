@@ -1,0 +1,19 @@
+{
+  "uid": "webhooks",
+  "type": "webhooks",
+  "config": {
+    "settings": {
+      "targetUrl": "https://hubspot-gong-app-production.up.railway.app/webhook",
+      "maxConcurrentRequests": 10
+    },
+    "subscriptions": {
+      "legacyCrmObjects": [
+        {
+          "subscriptionType": "deal.propertyChange",
+          "propertyName": "dealstage",
+          "active": true
+        }
+      ]
+    }
+  }
+}
