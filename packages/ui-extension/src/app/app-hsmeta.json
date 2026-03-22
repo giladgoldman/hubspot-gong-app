@@ -1,6 +1,6 @@
 {
   "uid": "gong_for_hubspot",
-  "type": "private-app",
+  "type": "app",
   "config": {
     "scopes": ["crm.objects.deals.read"],
     "extensions": {
