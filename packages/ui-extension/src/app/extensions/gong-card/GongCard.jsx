@@ -22,7 +22,7 @@ import {
 // ---------------------------------------------------------------------------
 // Configuration — set this after deploying the backend to Railway
 // ---------------------------------------------------------------------------
-const BACKEND_URL = 'https://your-app.railway.app'; // ← replace me
+const BACKEND_URL = 'https://hubspot-gong-app-production.up.railway.app';
 const POLL_INTERVAL_MS = 2500;
 
 // ---------------------------------------------------------------------------
