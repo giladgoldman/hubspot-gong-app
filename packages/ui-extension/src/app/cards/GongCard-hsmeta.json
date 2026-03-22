@@ -1,0 +1,11 @@
+{
+  "uid": "gong_card",
+  "type": "card",
+  "config": {
+    "name": "Gong",
+    "description": "Plays a gong sound when a deal is closed won",
+    "entrypoint": "/app/cards/GongCard.jsx",
+    "location": "crm.record.sidebar",
+    "objectTypes": ["DEALS"]
+  }
+}

@@ -2,16 +2,20 @@
   "uid": "gong_for_hubspot",
   "type": "app",
   "config": {
-    "scopes": ["crm.objects.deals.read"],
-    "extensions": {
-      "crm": {
-        "cards": [
-          {
-            "file": "extensions/gong-card/gong-card.json",
-            "type": "crm-card"
-          }
-        ]
-      }
+    "name": "Gong for HubSpot",
+    "description": "Plays a synthesized gong sound when a deal reaches Closed Won",
+    "distribution": "private",
+    "auth": {
+      "type": "static",
+      "redirectUrls": [],
+      "requiredScopes": ["crm.objects.deals.read"],
+      "optionalScopes": [],
+      "conditionallyRequiredScopes": []
+    },
+    "permittedUrls": {
+      "fetch": ["https://hubspot-gong-app-production.up.railway.app"],
+      "iframe": [],
+      "img": []
     }
   }
 }
