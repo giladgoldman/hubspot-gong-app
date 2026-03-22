@@ -4,7 +4,7 @@
   "config": {
     "name": "Gong for HubSpot",
     "description": "Plays a synthesized gong sound when a deal reaches Closed Won",
-    "distribution": "private",
+    "distribution": "public",
     "auth": {
       "type": "no_api_access",
       "requiredScopes": ["crm.objects.deals.read"],
