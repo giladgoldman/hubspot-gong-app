@@ -52,3 +52,9 @@ Auto-deploys to Railway on `git push origin main`.
 See `packages/backend/.env.example`. Key vars:
 - `HUBSPOT_CLIENT_SECRET` — for verifying webhook signatures
 - `CLOSED_WON_STAGE_ID` — internal deal stage value for Closed Won (default: `closedwon`)
+- `HUBSPOT_ACCESS_TOKEN` — private app token for deal name/amount enrichment (scope: `crm.objects.deals.read`)
+- `HUBSPOT_CLIENT_ID` — for OAuth token exchange at `/oauth-callback`
+- `SLACK_WEBHOOK_URL` — **Coming Soon** (code is in place but disabled; not yet active)
+
+## Coming Soon features
+- **Slack notifications** — code exists in `webhook.js` (`notifySlack`) but is commented out pending a test environment. Set `SLACK_WEBHOOK_URL` and uncomment the call to enable.

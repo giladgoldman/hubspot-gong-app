@@ -168,7 +168,7 @@ router.post('/', async (req, res) => {
       const dealAmount = props.amount ? parseFloat(props.amount) : null;
 
       addEvent(portalId, objectId, propertyValue, dealName, dealAmount);
-      notifySlack(dealName, dealAmount, objectId);
+      // notifySlack(dealName, dealAmount, objectId); // Coming Soon
 
       console.log(
         `[GONG] Portal ${portalId} · Deal ${objectId}${dealName ? ` "${dealName}"` : ''}${dealAmount ? ` $${dealAmount}` : ''} → Closed Won`
