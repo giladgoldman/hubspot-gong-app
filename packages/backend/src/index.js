@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const webhookRouter = require('./routes/webhook');
 const pollRouter = require('./routes/poll');
+const oauthRouter = require('./routes/oauth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -51,6 +52,7 @@ app.use(
 app.get('/health', (_req, res) => res.json({ ok: true, ts: Date.now() }));
 app.use('/webhook', webhookRouter);
 app.use('/poll', pollRouter);
+app.use('/oauth-callback', oauthRouter);
 
 // ---------------------------------------------------------------------------
 // Start

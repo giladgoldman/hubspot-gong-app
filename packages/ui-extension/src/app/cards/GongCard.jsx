@@ -3,10 +3,7 @@
  *
  * Renders in the Deal record sidebar. Polls the Railway backend every 2.5 s
  * and plays a synthesised gong via the Web Audio API when a Closed Won event
- * arrives for this portal.
- *
- * IMPORTANT: replace BACKEND_URL with your Railway deployment URL before
- * running `hs project deploy`.
+ * arrives for this portal. Shows deal name, value, and today's win stats.
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
@@ -20,7 +17,7 @@ import {
 } from '@hubspot/ui-extensions';
 
 // ---------------------------------------------------------------------------
-// Configuration — set this after deploying the backend to Railway
+// Configuration
 // ---------------------------------------------------------------------------
 const BACKEND_URL = 'https://hubspot-gong-app-production.up.railway.app';
 const POLL_INTERVAL_MS = 2500;
@@ -89,6 +86,19 @@ function playGong() {
 }
 
 // ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function formatCurrency(amount) {
+  if (amount == null) return null;
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+// ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 
@@ -101,8 +111,8 @@ function GongCard({ context }) {
   // mount so we don't replay events from the past.
   const lastSeenRef = useRef(Date.now() - 5_000);
 
-  const [status, setStatus] = useState('Listening for Closed Won…');
-  const [lastGongTime, setLastGongTime] = useState(null);
+  const [lastEvent, setLastEvent] = useState(null);   // { dealId, dealName, dealAmount, time }
+  const [dailyStats, setDailyStats] = useState({ count: 0, totalValue: 0 });
   const [audioUnlocked, setAudioUnlocked] = useState(false);
   const [pollError, setPollError] = useState(false);
 
@@ -120,15 +130,21 @@ function GongCard({ context }) {
       }
 
       setPollError(false);
-      const { events, serverTime } = await res.json();
+      const { events, dailyStats: stats, serverTime } = await res.json();
+
+      if (stats) setDailyStats(stats);
 
       if (events && events.length > 0) {
-        // Advance the cursor so next poll doesn't replay the same events
         lastSeenRef.current = serverTime ?? Date.now();
+        const latest = events[events.length - 1];
 
         playGong();
-        setLastGongTime(new Date().toLocaleTimeString());
-        setStatus(`GONG! Deal ${events[0].dealId} moved to Closed Won!`);
+        setLastEvent({
+          dealId: latest.dealId,
+          dealName: latest.dealName,
+          dealAmount: latest.dealAmount,
+          time: new Date().toLocaleTimeString(),
+        });
       }
     } catch {
       setPollError(true);
@@ -144,15 +160,15 @@ function GongCard({ context }) {
   // Handlers
   // ------------------------------------------------------------------
   function handleTestGong() {
-    // First click also unlocks the AudioContext for future auto-plays
     if (!audioUnlocked) setAudioUnlocked(true);
     playGong();
-    setStatus('Test gong played!');
   }
 
   // ------------------------------------------------------------------
   // Render
   // ------------------------------------------------------------------
+  const hasStats = dailyStats.count > 0;
+
   return (
     <Flex direction="column" gap="small">
       <Text format={{ fontWeight: 'bold', fontSize: 'md' }}>
@@ -175,11 +191,36 @@ function GongCard({ context }) {
         </Alert>
       )}
 
-      <Text>{status}</Text>
-
-      {lastGongTime && (
-        <Text variant="microcopy">Last gong: {lastGongTime}</Text>
+      {lastEvent ? (
+        <Flex direction="column" gap="extra-small">
+          <Text format={{ fontWeight: 'bold' }}>
+            GONG! {lastEvent.dealName ?? `Deal ${lastEvent.dealId}`} closed!
+          </Text>
+          {lastEvent.dealAmount != null && (
+            <Text>{formatCurrency(lastEvent.dealAmount)}</Text>
+          )}
+          <Text variant="microcopy">at {lastEvent.time}</Text>
+        </Flex>
+      ) : (
+        <Text>Listening for Closed Won…</Text>
       )}
+
+      {hasStats && (
+        <>
+          <Divider />
+          <Flex direction="column" gap="extra-small">
+            <Text format={{ fontWeight: 'bold' }}>Today's wins</Text>
+            <Text>
+              {dailyStats.count} deal{dailyStats.count !== 1 ? 's' : ''}
+              {dailyStats.totalValue > 0
+                ? ` · ${formatCurrency(dailyStats.totalValue)}`
+                : ''}
+            </Text>
+          </Flex>
+        </>
+      )}
+
+      <Divider />
 
       <Button onClick={handleTestGong} variant="secondary" size="small">
         Test Gong
